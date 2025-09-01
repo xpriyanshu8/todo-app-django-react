@@ -17,11 +17,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from api import views
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('tasks/',views.getTasks, name ="tasks"),
-    path('tasks/create/',views.createTasks, name ="create-tasks"),
-    path('tasks/update/<int:pk>/',views.updateTasks, name ="update-tasks"),
-    path('tasks/delete/<int:pk>/',views.deleteTasks, name ="delete-tasks"),
+    path('tasks/',views.getTask, name ="tasks"),
+    path('tasks/create/',views.createTask, name ="create-tasks"),
+    path('tasks/update/<int:pk>/',views.updateTask, name ="update-tasks"),
+    path('tasks/delete/<int:pk>/',views.deleteTask, name ="delete-tasks"),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
