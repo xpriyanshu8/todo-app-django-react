@@ -44,9 +44,13 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'api',
+    'corsheaders'
 ]
+CORS_ALLOW_ALL_ORIGINS = True
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,7 +59,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+STATIC_ROOT = BASE_DIR / "staticfiles"
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
@@ -81,7 +85,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'default':dj_database_url.config(default="sqlite:///db.sqlite3"),
+        'default': dj_database_url.config(default='postgres://...'),
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'todo_db' ,
         'USER': 'todo_user', 
